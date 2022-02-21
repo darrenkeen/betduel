@@ -1,0 +1,22 @@
+.App {
+  margin: 50px auto;
+  max-width: 1000px;
+}
+
+.main {
+  display: flex
+}
+
+h1, h2, h3, h4, span, p {
+  margin: 0;
+  padding: 0
+}
+
+.picks-container {
+  flex: 2;
+  margin-right: 20px;
+}
+
+.bet-slip-container {
+  flex: 1
+}

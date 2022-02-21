@@ -1,0 +1,59 @@
+.Picks__row {
+  display: flex;
+  background-color: #E8E8E8;
+}
+
+.Picks__row--odd {
+  background-color: #BEBEBE;
+}
+
+.Picks__col {
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Picks__col--add {
+  max-width: 30px;
+}
+
+.PicksHeading {
+  background-color: #0AA6E0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.PicksHeading .Picks__col > h2 {
+  font-size: 18px;
+}
+
+.Picks__add-btn {
+  color: white;
+  border: 0;
+  font-weight: 700;
+  border-radius: 6px;
+  background-color: #0AA6E0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.Picks__add-btn:disabled:not(.Picks__add-btn--selected) {
+  opacity: 0.5;
+}
+
+.Picks__add-btn--selected {
+  color: #0AA6E0;
+  background-color: white;
+  border: 2px solid #0AA6E0;
+}
+
+.Picks__add-btn:hover {
+  color: #0AA6E0;
+  background-color: white;
+}
+
+.Picks__row--odd {
+  background-color: #BEBEBE;
+}

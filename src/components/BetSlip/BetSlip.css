@@ -1,0 +1,94 @@
+.BetSlipHeading {
+  padding: 10px;
+  background-color: #606060;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.BetSlipHeading > h2 {
+  margin: 0;
+  padding: 0;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.BetSlipPick {
+  display: flex;
+  background-color: #E8E8E8;
+  padding: 10px;
+  align-items: center;
+}
+
+.BetSlipPick__fixure {
+  flex: 3
+}
+
+.BetSlipPick__odds {
+  flex: 1
+}
+
+.BetSlipPick__odds > span {
+  font-weight: bold;
+}
+
+.BetSlipPick__fixure > h3 {
+  font-size: 16px;
+}
+
+.BetSlipPick__fixure > span {
+  font-size: 12px
+}
+
+.BetSlipPick__remove {
+  display: flex;
+  align-items: center;
+}
+
+.BetSlipPick__remove--btn {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.BetSlipTotal {
+  background-color: #BEBEBE;
+  padding: 10px;
+}
+
+.BetSlipTotal__acc-odds {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spacer {
+  height: 1px;
+  background-color: #000000;
+  opacity: 0.25;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.BetSlipTotal__stake {
+  display: flex;
+  justify-content: space-between;
+}
+
+.BetSlipTotal__stake span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.BetSlip__empty {
+  background-color: #E8E8E8;
+  padding: 10px;
+}
+
+.BetSlipTotal__stake--input input {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 6px;
+  border: 2px solid #0AA6E0;
+  background-color: #E8E8E8;
+  max-width: 50px;
+}
