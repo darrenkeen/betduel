@@ -1,7 +1,7 @@
 # BetDuel
 > Made up UI for selecting bets and seeing the odds return
 
-![BetDuel](https://github.com/darrenkeen/betduel/blob/main/src/assets/betduel-web.png?raw=true)
+![BetDuel](https://github.com/darrenkeen/betduel/blob/initial_setup/src/assets/betduel-web.png?raw=true)
 
 ## Prerequisites
 You require the following in order to run this project:
