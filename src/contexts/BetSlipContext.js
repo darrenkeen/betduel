@@ -5,7 +5,7 @@ const intialState = {
   picks: [],
 };
 
-export const BetSlipContext = createContext(intialState);
+export const BetSlipContext = createContext();
 
 export function BetSlipContextProvider({ children }) {
   const [state, setState] = useState(intialState);

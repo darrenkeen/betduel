@@ -1,15 +1,17 @@
-.App {
-  margin: 50px auto;
-  max-width: 1000px;
-}
-
-.main {
-  display: flex
-}
 
 h1, h2, h3, h4, span, p {
   margin: 0;
   padding: 0
+}
+
+.App {
+  max-width: 1000px;
+  padding: 0 10px;
+  margin: 50px auto;
+}
+
+.main {
+  display: flex
 }
 
 .picks-container {

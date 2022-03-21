@@ -14,6 +14,14 @@ function BetSlipHeading() {
   );
 }
 
+function BetSlipEmpty() {
+  return (
+    <div className="BetSlipEmpty">
+      <p>You have no picks yet!</p>
+    </div>
+  );
+}
+
 function BetSlipPick({ pick, onRemoveFromSlip }) {
   return (
     <div className="BetSlipPick">
@@ -27,10 +35,7 @@ function BetSlipPick({ pick, onRemoveFromSlip }) {
         <span>{pick.odds}</span>
       </div>
       <div className="BetSlipPick__remove">
-        <button
-          className="BetSlipPick__remove--btn"
-          onClick={() => onRemoveFromSlip(pick.id)}
-        >
+        <button onClick={() => onRemoveFromSlip(pick.id)}>
           <img src={Remove} alt="Remove from slip" width={25} />
         </button>
       </div>
@@ -60,7 +65,7 @@ function BetSlipTotal() {
             type="text"
             value={stake}
             onChange={(event) => {
-              const value = event.target.value;
+              const { value } = event.target; // const value = event.target.value
               setStake(value);
             }}
           />
@@ -82,11 +87,7 @@ export function BetSlip() {
   return (
     <div className="BetSlip">
       <BetSlipHeading />
-      {picks.length < 1 && (
-        <div className="BetSlip__empty">
-          <p>You have no picks yet!</p>
-        </div>
-      )}
+      {picks.length < 1 && <BetSlipEmpty />}
       {picks.map((pick) => (
         <BetSlipPick
           pick={pick}

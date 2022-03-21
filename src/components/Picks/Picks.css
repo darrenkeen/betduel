@@ -1,10 +1,12 @@
-.Picks__row {
-  display: flex;
-  background-color: #E8E8E8;
+
+.PicksHeading {
+  background-color: #0AA6E0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
-.Picks__row--odd {
-  background-color: #BEBEBE;
+.Picks__row {
+  display: flex;
 }
 
 .Picks__col {
@@ -15,20 +17,17 @@
   justify-content: center;
 }
 
-.Picks__col--add {
-  max-width: 30px;
-}
-
-.PicksHeading {
-  background-color: #0AA6E0;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}
-
-.PicksHeading .Picks__col > h2 {
+.PicksHeading h2 {
   font-size: 18px;
 }
 
+.Picks__row:not(.PicksHeading) {
+  background-color: #E8E8E8;
+}
+
+.Picks__row.Picks__row--odd {
+  background-color: #BEBEBE;
+}
 .Picks__add-btn {
   color: white;
   border: 0;
@@ -36,6 +35,11 @@
   border-radius: 6px;
   background-color: #0AA6E0;
   padding: 5px 10px;
+}
+
+.Picks__add-btn:not(:disabled):hover {
+  color: #0AA6E0;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -47,13 +51,4 @@
   color: #0AA6E0;
   background-color: white;
   border: 2px solid #0AA6E0;
-}
-
-.Picks__add-btn:hover {
-  color: #0AA6E0;
-  background-color: white;
-}
-
-.Picks__row--odd {
-  background-color: #BEBEBE;
 }
