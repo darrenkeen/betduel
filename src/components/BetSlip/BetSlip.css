@@ -15,7 +15,7 @@
   padding: 10px;
 }
 
-.BetSlipPick {
+.BetSlipPick, .BetSlipEmpty {
   display: flex;
   background-color: #E8E8E8;
   padding: 10px;

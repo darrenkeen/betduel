@@ -1,6 +1,8 @@
+import { useContext } from 'react';
+
 import './Picks.css';
 import { picksData } from '../../picksData';
-import { useBetSlip } from '../../hooks/useBetSlip';
+import { BetSlipContext } from '../../contexts/BetSlipContext';
 
 function PicksHeading() {
   const headings = ['Home', 'Away', '1', 'X', '2'];
@@ -16,7 +18,7 @@ function PicksHeading() {
 }
 
 function PicksFixture({ pick, isOdd }) {
-  const { onAddToSlip, picks } = useBetSlip();
+  const { onAddToSlip, picks } = useContext(BetSlipContext);
   const currentSelection = picks.find((currPick) => currPick.id === pick.id);
   return (
     <div

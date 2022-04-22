@@ -1,10 +1,10 @@
 import './BetSlip.css';
 import Remove from '../../assets/remove.png';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { getTeam } from '../../utils/getTeam';
 import { getCalculatedOdds } from '../../utils/getCalculatedOdds';
 import { getCalculatedReturns } from '../../utils/getCalculatedReturns';
-import { useBetSlip } from '../../hooks/useBetSlip';
+import { BetSlipContext } from '../../contexts/BetSlipContext';
 
 function BetSlipHeading() {
   return (
@@ -22,7 +22,8 @@ function BetSlipEmpty() {
   );
 }
 
-function BetSlipPick({ pick, onRemoveFromSlip }) {
+function BetSlipPick({ pick }) {
+  const { onRemoveFromSlip } = useContext(BetSlipContext);
   return (
     <div className="BetSlipPick">
       <div className="BetSlipPick__fixure">
@@ -45,7 +46,7 @@ function BetSlipPick({ pick, onRemoveFromSlip }) {
 
 function BetSlipTotal() {
   const [stake, setStake] = useState('');
-  const { picks } = useBetSlip();
+  const { picks } = useContext(BetSlipContext);
 
   return (
     <div className="BetSlipTotal">
@@ -82,18 +83,14 @@ function BetSlipTotal() {
 }
 
 export function BetSlip() {
-  const { picks, onRemoveFromSlip } = useBetSlip();
+  const { picks } = useContext(BetSlipContext);
 
   return (
     <div className="BetSlip">
       <BetSlipHeading />
       {picks.length < 1 && <BetSlipEmpty />}
       {picks.map((pick) => (
-        <BetSlipPick
-          pick={pick}
-          key={pick.id}
-          onRemoveFromSlip={onRemoveFromSlip}
-        />
+        <BetSlipPick pick={pick} key={pick.id} />
       ))}
       <BetSlipTotal />
     </div>
