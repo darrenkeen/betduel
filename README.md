@@ -32,3 +32,141 @@ Yarn:
 ```sh
 $ yarn start
 ```
+
+## Server 
+
+### Get Picks/Fixtures
+Returns all the fixtures and their information like team names and odds.
+
+#### Request
+```
+GET: /fixtures
+```
+#### Response
+```
+{
+  "message": string,
+  "data": {
+    "id": number,
+    "homeTeam": string,
+    "awayTeam": string,
+    "homeOdds": number,
+    "awayOdds": number,
+    "drawOdds": number
+  }[]
+}
+```
+
+
+### Get betslips
+Returns all the created betslips.
+
+#### Request
+```
+GET: /betslip
+```
+#### Response
+```
+{
+  "message": string,
+  "data": {
+    "betslipId": number,
+    "stake": number,
+    "returns": number,
+    "picks": {
+      "selection" string,
+      "fixture": {
+        "homeTeam": string,
+        "awayTeam": string,
+        "homeOdds": number,
+        "awayOdds": number,
+        "drawOdds": number
+      }
+    }[]
+  }[]
+}
+```
+
+### Get single betslip
+Returns a specific betslip based on its ID.
+
+#### Request
+```
+GET: /betslip/:id
+```
+#### Response
+```
+{
+  "message": string,
+  "data": {
+    "betslipId": number,
+    "stake": number,
+    "returns": number,
+    "picks": {
+      "selection" string,
+      "fixture": {
+        "homeTeam": string,
+        "awayTeam": string,
+        "homeOdds": number,
+        "awayOdds": number,
+        "drawOdds": number
+      }
+    }[]
+  }
+}
+```
+
+### Get single betslip
+Creates a betslip and returns the created data
+
+#### Request
+```
+POST: /betslip/create
+```
+Example post data:
+```
+{
+	"picks": [
+		{
+			"fixtureId": 1,
+			"selection": "draw"
+		},
+		{
+			"fixtureId": 2,
+			"selection": "home"
+		},
+		{
+			"fixtureId": 3,
+			"selection": "away"
+		},
+		{
+			"fixtureId": 4,
+			"selection": "home"
+		}
+	],
+	"stake": 12.45,
+	"returns": 1235.12
+}
+```
+
+#### Response
+```
+{
+  "message": string,
+  "data": {
+    "betslipId": number,
+    "stake": number,
+    "returns": number,
+    "picks": {
+      "selection" string,
+      "fixture": {
+        "homeTeam": string,
+        "awayTeam": string,
+        "homeOdds": number,
+        "awayOdds": number,
+        "drawOdds": number
+      }
+    }[]
+  }
+}
+```

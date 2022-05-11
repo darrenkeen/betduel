@@ -68,7 +68,6 @@ export function PicksDataEmpty() {
 export function Picks() {
   const [picksData, setPicksData] = useState([]);
   const [picksLoading, setPicksLoading] = useState(true);
-  const [testState, setTestState] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
