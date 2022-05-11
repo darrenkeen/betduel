@@ -94,7 +94,7 @@
   max-width: 50px;
 }
 
-.BetSlipPlaceBet {
+.BetSlipPlaceBet__button-wrapper {
   background-color: #606060;
   padding-block: 10px;
   display: flex;
@@ -125,4 +125,11 @@
 
 .BetSlipPlaceBet button:disabled {
   opacity: 0.5;
+}
+
+.BetSlipPlaceBet__error-wrapper {
+  background-color: #ffbcbc;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: bold;
 }

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Loader } from '../Loader/Loader';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
+import { useError } from '../../hooks/useError';
 
 function PicksHeading() {
   const headings = ['Home', 'Away', '1', 'X', '2'];
@@ -65,9 +66,18 @@ export function PicksDataEmpty() {
   );
 }
 
+export function PicksDataError({ error }) {
+  return (
+    <div className="PicksDataError">
+      <span className="error">{error}</span>
+    </div>
+  );
+}
+
 export function Picks() {
   const [picksData, setPicksData] = useState([]);
   const [picksLoading, setPicksLoading] = useState(true);
+  const { error, onSetError } = useError();
 
   useEffect(() => {
     async function fetchData() {
@@ -79,6 +89,7 @@ export function Picks() {
         }, 1000);
       } catch (e) {
         console.error(e);
+        onSetError(e.response.data?.message || e.message);
         setPicksLoading(false);
       }
     }
@@ -94,6 +105,8 @@ export function Picks() {
         <Loader />
       ) : picksData.length > 0 ? (
         <PicksContent picksData={picksData} />
+      ) : error ? (
+        <PicksDataError error={error} />
       ) : (
         <PicksDataEmpty />
       )}

@@ -1,6 +1,6 @@
 import './BetSlip.css';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Remove from '../../assets/remove.png';
 import { getTeam } from '../../utils/getTeam';
@@ -9,6 +9,7 @@ import { getCalculatedOdds } from '../../utils/getCalculatedOdds';
 import { getCalculatedReturns } from '../../utils/getCalculatedReturns';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
 import { ModalContext } from '../../contexts/ModalContext';
+import { useError } from '../../hooks/useError';
 
 function BetSlipHeading() {
   return (
@@ -88,6 +89,7 @@ function BetSlipTotal() {
 export function BetSlipPlaceBet() {
   const { picks, stake, returns } = useContext(BetSlipContext);
   const { onSetShowModal } = useContext(ModalContext);
+  const { error, onSetError } = useError();
 
   async function onSubmitBet() {
     try {
@@ -99,18 +101,30 @@ export function BetSlipPlaceBet() {
       if (res.data.message === 'success') {
         onSetShowModal(true);
       } else {
-        throw new Error(res.data.message);
+        onSetError(res.data.message);
       }
     } catch (e) {
+      onSetError(e.response.data?.message || e.message);
       console.error(e);
     }
   }
 
+  useEffect(() => {
+    onSetError('');
+  }, [picks, stake]);
+
   return (
     <div className="BetSlipPlaceBet">
-      <button disabled={picks.length === 0 || !stake} onClick={onSubmitBet}>
-        Place bet
-      </button>
+      <div className="BetSlipPlaceBet__button-wrapper">
+        <button disabled={!stake} onClick={onSubmitBet}>
+          Place bet
+        </button>
+      </div>
+      {error && (
+        <div className="BetSlipPlaceBet__error-wrapper">
+          <p className="error">{error}</p>
+        </div>
+      )}
     </div>
   );
 }

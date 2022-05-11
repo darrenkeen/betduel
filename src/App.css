@@ -22,3 +22,7 @@ h1, h2, h3, h4, span, p {
 .bet-slip-container {
   flex: 1
 }
+
+.error {
+  color: red
+}
