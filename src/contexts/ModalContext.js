@@ -3,17 +3,17 @@ import { createContext, useState } from 'react';
 export const ModalContext = createContext();
 
 export function ModalContextProvider({ children }) {
-  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState('');
 
-  function onSetShowModal(val) {
-    setShowModal(val);
+  function onSetModalContent(val) {
+    setModalContent(val);
   }
 
   return (
     <ModalContext.Provider
       value={{
-        showModal,
-        onSetShowModal,
+        modalContent,
+        onSetModalContent,
       }}
     >
       {children}

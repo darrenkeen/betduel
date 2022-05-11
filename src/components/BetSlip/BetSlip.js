@@ -88,7 +88,7 @@ function BetSlipTotal() {
 
 export function BetSlipPlaceBet() {
   const { picks, stake, returns } = useContext(BetSlipContext);
-  const { onSetShowModal } = useContext(ModalContext);
+  const { onSetModalContent } = useContext(ModalContext);
   const { error, onSetError } = useError();
 
   async function onSubmitBet() {
@@ -99,7 +99,7 @@ export function BetSlipPlaceBet() {
         returns,
       });
       if (res.data.message === 'success') {
-        onSetShowModal(true);
+        onSetModalContent('Betslip Created!');
       } else {
         onSetError(res.data.message);
       }

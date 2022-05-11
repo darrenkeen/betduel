@@ -1,10 +1,41 @@
-import './:id.css';
+import './singleBetSlip.css';
 
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Loader } from '../../../components/Loader/Loader';
 import { useError } from '../../../hooks/useError';
+import { ModalContext } from '../../../contexts/ModalContext';
+
+function SingleBetSlipRemove({ betSlipId }) {
+  const [removeLoading, setRemoveLoading] = useState(false);
+  const { onSetModalContent } = useContext(ModalContext);
+  const { error, onSetError } = useError();
+  const navigate = useNavigate();
+
+  async function onRemoveBetSlip() {
+    try {
+      setRemoveLoading(true);
+      const res = await axios.delete(`/betslip/${betSlipId}`);
+      if (res.data.message === 'success') {
+        onSetModalContent(`Betslip ${betSlipId} removed.`);
+        navigate('/betslip');
+      }
+    } catch (e) {
+      onSetError(e.response.data?.message || e.message);
+      setRemoveLoading(false);
+      console.error(e);
+    }
+  }
+  return (
+    <div className="SingleBetSlipRemove">
+      <button disabled={removeLoading} onClick={onRemoveBetSlip}>
+        Delete betslip
+      </button>
+      {error && <span>There was a problem removing betslip</span>}
+    </div>
+  );
+}
 
 function SingleBetSlipPick({ pick }) {
   return (
@@ -30,26 +61,27 @@ function SingleBetSlipPick({ pick }) {
   );
 }
 
-function SingleBetSlipPickContent({ betSlip }) {
+function SingleBetSlipContent({ betSlip }) {
   return (
-    <div className="SingleBetSlipPickContent">
-      <div className="SingleBetSlipPickContent__row">
+    <div className="SingleBetSlipContent">
+      <div className="SingleBetSlipContent__row">
         <span>ID</span>
         <span>{betSlip.betslipId}</span>
       </div>
-      <div className="SingleBetSlipPickContent__row">
+      <div className="SingleBetSlipContent__row">
         <span>Stake</span>
         <span>£{betSlip.stake}</span>
       </div>
-      <div className="SingleBetSlipPickContent__row">
+      <div className="SingleBetSlipContent__row">
         <span>Returns</span>
         <span>£{betSlip.returns}</span>
       </div>
-      <div className="SingleBetSlipPickContent__picks">
+      <div className="SingleBetSlipContent__picks">
         <h1>Picks</h1>
         {betSlip.picks.map((pick) => (
           <SingleBetSlipPick key={pick.fixture.homeTeam} pick={pick} />
         ))}
+        <SingleBetSlipRemove betSlipId={betSlip.betslipId} />
       </div>
     </div>
   );
@@ -79,7 +111,7 @@ export function SingleBetSlip() {
       {betSlipLoading ? (
         <Loader />
       ) : betSlipData ? (
-        <SingleBetSlipPickContent betSlip={betSlipData} />
+        <SingleBetSlipContent betSlip={betSlipData} />
       ) : error ? (
         <span>{error}</span>
       ) : (

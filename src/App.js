@@ -6,7 +6,7 @@ import { BetSlipContextProvider } from './contexts/BetSlipContext';
 import { Modal } from './components/Modal/Modal';
 import { ModalContextProvider } from './contexts/ModalContext';
 import { BetSlipPage } from './pages/betSlip/betSlip';
-import { SingleBetSlip } from './pages/betSlip/:id/:id';
+import { SingleBetSlip } from './pages/betSlip/singleBetSlip/singleBetSlip';
 
 function App() {
   return (

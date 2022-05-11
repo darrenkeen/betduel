@@ -16,16 +16,16 @@ const customStyles = {
 ReactModal.setAppElement('#root');
 
 export function Modal() {
-  const { showModal, onSetShowModal } = useContext(ModalContext);
+  const { modalContent, onSetModalContent } = useContext(ModalContext);
   return (
     <ReactModal
-      isOpen={showModal}
+      isOpen={modalContent}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
-      onRequestClose={() => onSetShowModal(false)}
+      onRequestClose={() => onSetModalContent('')}
     >
       <div className="Modal">
-        <h1>Your bet has been placed successfully</h1>
+        <h1>{modalContent}</h1>
       </div>
     </ReactModal>
   );
