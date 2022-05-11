@@ -101,32 +101,6 @@
   justify-content: center;
 }
 
-.BetSlipPlaceBet button {
-  border: 0;
-  background-color: #0AA6E0;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px 15px;
-  border-radius: 6px;
-  border: 3px solid transparent;
-}
-
-.BetSlipPlaceBet button:hover:not(:disabled) {
-  color: #0AA6E0;
-  background-color: white;
-  cursor: pointer;
-  
-}
-
-.BetSlipPlaceBet button:active {
-  border: 3px solid #0AA6E0;
-}
-
-.BetSlipPlaceBet button:disabled {
-  opacity: 0.5;
-}
-
 .BetSlipPlaceBet__error-wrapper {
   background-color: #ffbcbc;
   padding: 5px 10px;

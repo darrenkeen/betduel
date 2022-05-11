@@ -116,7 +116,7 @@ export function BetSlipPlaceBet() {
   return (
     <div className="BetSlipPlaceBet">
       <div className="BetSlipPlaceBet__button-wrapper">
-        <button disabled={!stake} onClick={onSubmitBet}>
+        <button disabled={!stake || picks.length === 0} onClick={onSubmitBet}>
           Place bet
         </button>
       </div>

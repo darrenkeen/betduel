@@ -1,0 +1,8 @@
+.SingleBetSlipPickContent__row span:first-child {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.SingleBetSlipPickContent__picks {
+  margin-top: 20px;
+}

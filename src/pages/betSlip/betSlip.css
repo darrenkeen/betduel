@@ -1,0 +1,24 @@
+.BetSlipPage {
+  width: 100%;
+}
+
+.BetSlipPageContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.BetSlipPageContent__card {
+  background-color: #E8E8E8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.BetSlipPageContent__card-row {
+  margin-bottom: 5px;
+}
+
+.BetSlipPageContent__card-row span:first-child {
+  margin-right: 5px;
+  font-weight: bold;
+}
