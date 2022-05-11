@@ -1,6 +1,6 @@
 import './BetSlip.css';
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 import Remove from '../../assets/remove.png';
 import { getTeam } from '../../utils/getTeam';
@@ -8,6 +8,7 @@ import { mapPicksData } from '../../utils/mapPicksData';
 import { getCalculatedOdds } from '../../utils/getCalculatedOdds';
 import { getCalculatedReturns } from '../../utils/getCalculatedReturns';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
+import { ModalContext } from '../../contexts/ModalContext';
 
 function BetSlipHeading() {
   return (
@@ -86,6 +87,7 @@ function BetSlipTotal() {
 
 export function BetSlipPlaceBet() {
   const { picks, stake, returns } = useContext(BetSlipContext);
+  const { onSetShowModal } = useContext(ModalContext);
 
   async function onSubmitBet() {
     try {
@@ -95,7 +97,9 @@ export function BetSlipPlaceBet() {
         returns,
       });
       if (res.data.message === 'success') {
-        // onSetShowModal(true);
+        onSetShowModal(true);
+      } else {
+        throw new Error(res.data.message);
       }
     } catch (e) {
       console.error(e);
@@ -104,7 +108,7 @@ export function BetSlipPlaceBet() {
 
   return (
     <div className="BetSlipPlaceBet">
-      <button disabled={picks.length === 0} onClick={onSubmitBet}>
+      <button disabled={picks.length === 0 || !stake} onClick={onSubmitBet}>
         Place bet
       </button>
     </div>
