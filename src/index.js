@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import axios from 'axios';
 
 /*
 - React Single Page App
@@ -12,6 +13,8 @@ import App from './App';
   - Its quicker to manipulate than the actual DOM since it all lives in react memory and not on screen.
     You can then make changes to it, batch it up then present in 1 go
 */
+
+axios.defaults.baseURL = 'http://localhost:4000';
 
 ReactDOM.render(
   <React.StrictMode>

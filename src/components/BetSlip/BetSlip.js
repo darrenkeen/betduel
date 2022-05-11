@@ -1,7 +1,10 @@
 import './BetSlip.css';
-import Remove from '../../assets/remove.png';
+import axios from 'axios';
 import { useState, useContext } from 'react';
+
+import Remove from '../../assets/remove.png';
 import { getTeam } from '../../utils/getTeam';
+import { mapPicksData } from '../../utils/mapPicksData';
 import { getCalculatedOdds } from '../../utils/getCalculatedOdds';
 import { getCalculatedReturns } from '../../utils/getCalculatedReturns';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
@@ -45,8 +48,7 @@ function BetSlipPick({ pick }) {
 }
 
 function BetSlipTotal() {
-  const [stake, setStake] = useState('');
-  const { picks } = useContext(BetSlipContext);
+  const { picks, stake, onSetStake } = useContext(BetSlipContext);
 
   return (
     <div className="BetSlipTotal">
@@ -67,17 +69,44 @@ function BetSlipTotal() {
             value={stake}
             onChange={(event) => {
               const { value } = event.target; // const value = event.target.value
-              setStake(value);
+              onSetStake(value);
             }}
           />
         </div>
         <div className="BetSlipTotal__stake--returns">
           <span>Returns</span>
           <h4>
-            {getCalculatedReturns(getCalculatedOdds(picks).toFixed(2), stake)}
+            £{getCalculatedReturns(getCalculatedOdds(picks).toFixed(2), stake)}
           </h4>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function BetSlipPlaceBet() {
+  const { picks, stake, returns } = useContext(BetSlipContext);
+
+  async function onSubmitBet() {
+    try {
+      const res = await axios.post('/betslip/create', {
+        picks: mapPicksData(picks),
+        stake,
+        returns,
+      });
+      if (res.data.message === 'success') {
+        // onSetShowModal(true);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  return (
+    <div className="BetSlipPlaceBet">
+      <button disabled={picks.length === 0} onClick={onSubmitBet}>
+        Place bet
+      </button>
     </div>
   );
 }
@@ -93,6 +122,7 @@ export function BetSlip() {
         <BetSlipPick pick={pick} key={pick.id} />
       ))}
       <BetSlipTotal />
+      <BetSlipPlaceBet />
     </div>
   );
 }

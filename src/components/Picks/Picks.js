@@ -1,7 +1,8 @@
-import { useContext } from 'react';
-
 import './Picks.css';
-import { picksData } from '../../picksData';
+import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+
+import { Loader } from '../Loader/Loader';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
 
 function PicksHeading() {
@@ -50,13 +51,53 @@ function PicksFixture({ pick, isOdd }) {
   );
 }
 
+export function PicksContent({ picksData }) {
+  return picksData.map((pick, index) => (
+    <PicksFixture key={pick.id} pick={pick} isOdd={Boolean(index % 2)} />
+  ));
+}
+
+export function PicksDataEmpty() {
+  return (
+    <div className="PicksDataEmpty">
+      <span>No picks data</span>
+    </div>
+  );
+}
+
 export function Picks() {
+  const [picksData, setPicksData] = useState([]);
+  const [picksLoading, setPicksLoading] = useState(true);
+  const [testState, setTestState] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get('/fixtures');
+        setTimeout(() => {
+          setPicksData(res.data.data);
+          setPicksLoading(false);
+        }, 1000);
+      } catch (e) {
+        console.error(e);
+        setPicksLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="Picks">
       <PicksHeading />
-      {picksData.map((pick, index) => (
-        <PicksFixture key={pick.id} pick={pick} isOdd={Boolean(index % 2)} />
-      ))}
+      {/* <button onClick={() => setPicksLoading(!picksLoading)}>Click me</button> */}
+      {picksLoading ? (
+        <Loader />
+      ) : picksData.length > 0 ? (
+        <PicksContent picksData={picksData} />
+      ) : (
+        <PicksDataEmpty />
+      )}
     </div>
   );
 }
