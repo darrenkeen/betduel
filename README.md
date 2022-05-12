@@ -116,7 +116,7 @@ GET: /betslip/:id
 }
 ```
 
-### Get single betslip
+### Create betslip
 Creates a betslip and returns the created data
 
 #### Request
@@ -168,5 +168,20 @@ Example post data:
       }
     }[]
   }
+}
+```
+
+### Delete betslip
+Deletes a betslip and returns message
+
+#### Request
+```
+DELETE: /betslip/:id
+```
+
+#### Response
+```
+{
+  "message": string,
 }
 ```
