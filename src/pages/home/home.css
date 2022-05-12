@@ -3,11 +3,11 @@
   width: 100%;
 }
 
-.HomePage .picks-container {
+.HomePage__picks-container {
   flex: 2;
   margin-right: 20px;
 }
 
-.HomePage .bet-slip-container {
+.HomePage__bet-slip-container {
   flex: 1
 }

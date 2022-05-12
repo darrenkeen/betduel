@@ -43,7 +43,10 @@ function SingleBetSlipPick({ pick }) {
       <span>
         <span
           className={
-            (pick.selection === 'home' || pick.selection === 'draw') && 'bold'
+            pick.selection.toLowerCase() === 'home' ||
+            pick.selection.toLowerCase() === 'draw'
+              ? 'bold'
+              : ''
           }
         >
           {pick.fixture.homeTeam}
@@ -51,7 +54,10 @@ function SingleBetSlipPick({ pick }) {
         vs{' '}
         <span
           className={
-            (pick.selection === 'away' || pick.selection === 'draw') && 'bold'
+            pick.selection.toLowerCase() === 'away' ||
+            pick.selection.toLowerCase() === 'draw'
+              ? 'bold'
+              : ''
           }
         >
           {pick.fixture.awayTeam}

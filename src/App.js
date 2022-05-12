@@ -18,8 +18,10 @@ function App() {
             <div className="main">
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="betSlip" element={<BetSlipPage />} />
-                <Route path="betSlip/:id" element={<SingleBetSlip />} />
+                <Route path="betslip">
+                  <Route index element={<BetSlipPage />} />
+                  <Route path=":id" element={<SingleBetSlip />} />
+                </Route>
               </Routes>
             </div>
             <Modal />

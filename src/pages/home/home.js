@@ -6,10 +6,10 @@ import { BetSlip } from '../../components/BetSlip/BetSlip';
 export function HomePage() {
   return (
     <div className="HomePage">
-      <div className="picks-container">
+      <div className="HomePage__picks-container">
         <Picks />
       </div>
-      <div className="bet-slip-container">
+      <div className="HomePage__bet-slip-container">
         <BetSlip />
       </div>
     </div>

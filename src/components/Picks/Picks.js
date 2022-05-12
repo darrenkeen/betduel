@@ -102,7 +102,9 @@ export function Picks() {
       <PicksHeading />
       {/* <button onClick={() => setPicksLoading(!picksLoading)}>Click me</button> */}
       {picksLoading ? (
-        <Loader />
+        <div className="Picks__loader-wrapper">
+          <Loader />
+        </div>
       ) : picksData.length > 0 ? (
         <PicksContent picksData={picksData} />
       ) : error ? (
