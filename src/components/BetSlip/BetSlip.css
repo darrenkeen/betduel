@@ -20,6 +20,7 @@
   background-color: #E8E8E8;
   padding: 10px;
   align-items: center;
+  
 }
 
 .BetSlipPick__fixure {
@@ -91,4 +92,18 @@
   border: 2px solid #0AA6E0;
   background-color: #E8E8E8;
   max-width: 50px;
+}
+
+.BetSlipPlaceBet__button-wrapper {
+  background-color: #606060;
+  padding-block: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.BetSlipPlaceBet__error-wrapper {
+  background-color: #ffbcbc;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: bold;
 }

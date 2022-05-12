@@ -1,3 +1,14 @@
 .Header {
+  display: flex;
+  align-items: flex-end;
   margin-bottom: 20px;
+}
+
+.Header a, .Header a:visited {
+  color: #606060;
+  font-weight: bold;
+}
+
+.Header a:not(:last-child) {
+  margin-right: 10px;
 }

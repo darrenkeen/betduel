@@ -1,0 +1,25 @@
+.SingleBetSlipContent__row span:first-child {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.SingleBetSlipContent__picks {
+  margin-top: 20px;
+}
+
+.SingleBetSlipRemove {
+  margin-top: 10px;
+}
+
+.SingleBetSlipRemove button {
+background-color: red;
+}
+
+.SingleBetSlipRemove button:hover {
+  background-color: #be0000;
+  color: white
+}
+
+.SingleBetSlipRemove button:active {
+  border-color: red;
+}
