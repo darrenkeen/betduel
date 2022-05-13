@@ -95,10 +95,10 @@
 }
 
 .BetSlipPlaceBet__button-wrapper {
-  background-color: #606060;
-  padding-block: 10px;
   display: flex;
   justify-content: center;
+  background-color: #606060;
+  padding-block: 10px;
 }
 
 .BetSlipPlaceBet__error-wrapper {
