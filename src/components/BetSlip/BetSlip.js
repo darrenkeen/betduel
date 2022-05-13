@@ -1,10 +1,14 @@
 import './BetSlip.css';
+import axios from 'axios';
 import Remove from '../../assets/remove.png';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { getTeam } from '../../utils/getTeam';
 import { getCalculatedOdds } from '../../utils/getCalculatedOdds';
 import { getCalculatedReturns } from '../../utils/getCalculatedReturns';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
+import { mapPicksdata } from '../../utils/mapPicksData';
+import { useError } from '../../hooks/useError';
+import { ModalContext } from '../../contexts/ModalContext';
 
 function BetSlipHeading() {
   return (
@@ -45,8 +49,7 @@ function BetSlipPick({ pick }) {
 }
 
 function BetSlipTotal() {
-  const [stake, setStake] = useState('');
-  const { picks } = useContext(BetSlipContext);
+  const { picks, stake, returns, onSetStake } = useContext(BetSlipContext);
 
   return (
     <div className="BetSlipTotal">
@@ -67,17 +70,55 @@ function BetSlipTotal() {
             value={stake}
             onChange={(event) => {
               const { value } = event.target; // const value = event.target.value
-              setStake(value);
+              onSetStake(value);
             }}
           />
         </div>
         <div className="BetSlipTotal__stake--returns">
           <span>Returns</span>
-          <h4>
-            {getCalculatedReturns(getCalculatedOdds(picks).toFixed(2), stake)}
-          </h4>
+          <h4>£{returns}</h4>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BetSlipPlaceBet() {
+  const { picks, stake, returns } = useContext(BetSlipContext);
+  const { onSetModalContent } = useContext(ModalContext);
+  const { error, onSetError } = useError();
+
+  async function onPlaceBet() {
+    try {
+      const res = await axios.post('/betslip/create', {
+        picks: mapPicksdata(picks),
+        stake,
+        returns,
+      });
+      if (res.data.message === 'success') {
+        onSetModalContent('Betslip created');
+      } else {
+        onSetError(res.data.message);
+      }
+      console.log(res);
+    } catch (e) {
+      console.error(e);
+      onSetError(e.response?.data?.message || e.message);
+    }
+  }
+
+  return (
+    <div className="BetSlipPlaceBet">
+      <div className="BetSlipPlaceBet__button-wrapper">
+        <button className="button" onClick={onPlaceBet}>
+          Place bet
+        </button>
+      </div>
+      {error && (
+        <div className="BetSlipPlaceBet__error-wrapper">
+          <p className="error">{error}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -93,6 +134,7 @@ export function BetSlip() {
         <BetSlipPick pick={pick} key={pick.id} />
       ))}
       <BetSlipTotal />
+      <BetSlipPlaceBet />
     </div>
   );
 }

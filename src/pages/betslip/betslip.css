@@ -1,0 +1,24 @@
+.BetslipPage {
+  width: 100%;
+}
+
+.BetslipPageContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.BetslipPageContent__card {
+  background-color: #E8E8E8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.BetslipPageContent__card-row {
+  margin-bottom: 5px;
+}
+
+.BetslipPageContent__card-row span:first-child {
+  font-weight: bold;
+  margin-right: 5px;
+}

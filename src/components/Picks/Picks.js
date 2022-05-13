@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './Picks.css';
-import { picksData } from '../../picksData';
 import { BetSlipContext } from '../../contexts/BetSlipContext';
+import { Loader } from '../Loader/Loader';
+import { useError } from '../../hooks/useError';
 
 function PicksHeading() {
   const headings = ['Home', 'Away', '1', 'X', '2'];
@@ -50,13 +52,65 @@ function PicksFixture({ pick, isOdd }) {
   );
 }
 
+function PicksContent({ picksData }) {
+  return picksData.map((pick, index) => (
+    <PicksFixture key={pick.id} pick={pick} isOdd={Boolean(index % 2)} />
+  ));
+}
+
+function PicksEmptyData() {
+  return (
+    <div className="PickEmptyData">
+      <span>No picks data!</span>
+    </div>
+  );
+}
+
 export function Picks() {
+  const [picksData, setPicksData] = useState([]);
+  const [picksDataLoading, setPicksDataLoading] = useState(true);
+  const { error, onSetError } = useError();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get('/fixtures');
+        if (res.data.message === 'success') {
+          setTimeout(() => {
+            setPicksData(res.data.data);
+            setPicksDataLoading(false);
+          }, 1000);
+        } else {
+          console.error(res.data.message);
+          onSetError(res.data.message);
+          setPicksDataLoading(false);
+        }
+      } catch (e) {
+        console.error(e);
+        onSetError(e.response?.data?.message || e.message);
+        setPicksDataLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="Picks">
       <PicksHeading />
-      {picksData.map((pick, index) => (
-        <PicksFixture key={pick.id} pick={pick} isOdd={Boolean(index % 2)} />
-      ))}
+      {picksDataLoading ? (
+        <div className="Picks__loader-wrapper">
+          <Loader />
+        </div>
+      ) : picksData.length > 0 ? (
+        <PicksContent picksData={picksData} />
+      ) : error ? (
+        <div className="PicksDataError">
+          <span className="error">{error}</span>
+        </div>
+      ) : (
+        <PicksEmptyData />
+      )}
     </div>
   );
 }

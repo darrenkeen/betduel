@@ -52,3 +52,16 @@
   background-color: white;
   border: 2px solid #0AA6E0;
 }
+
+.Picks__loader-wrapper, .PickEmptyData, .PicksDataError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 30px;
+  background-color: #E8E8E8;
+}
+
+.PicksDataError {
+  background-color: #ffbcbc;
+  font-weight: bold;
+}

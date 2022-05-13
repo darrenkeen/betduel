@@ -1,24 +1,35 @@
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import { Header } from './components/Header/Header';
-import { Picks } from './components/Picks/Picks';
-import { BetSlip } from './components/BetSlip/BetSlip';
 import { BetSlipContextProvider } from './contexts/BetSlipContext';
+import { ModalContextProvider } from './contexts/ModalContext';
+import { Modal } from './components/Modal/Modal';
+import { HomePage } from './pages/home/home';
+import { BetslipPage } from './pages/betslip/betslip';
+import { SingleBetslipPage } from './pages/singleBetslip/singleBetslip';
 
 function App() {
   return (
-    <BetSlipContextProvider>
-      <div className="App">
-        <Header />
-        <div className="main">
-          <div className="picks-container">
-            <Picks />
+    <BrowserRouter>
+      <ModalContextProvider>
+        <BetSlipContextProvider>
+          <div className="App">
+            <Header />
+            <div className="main">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="betslip">
+                  <Route index element={<BetslipPage />} />
+                  <Route path=":id" element={<SingleBetslipPage />} />
+                </Route>
+              </Routes>
+            </div>
+            <Modal />
           </div>
-          <div className="bet-slip-container">
-            <BetSlip />
-          </div>
-        </div>
-      </div>
-    </BetSlipContextProvider>
+        </BetSlipContextProvider>
+      </ModalContextProvider>
+    </BrowserRouter>
   );
 }
 

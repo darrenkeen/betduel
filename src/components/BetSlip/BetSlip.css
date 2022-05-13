@@ -92,3 +92,14 @@
   background-color: #E8E8E8;
   max-width: 50px;
 }
+
+.BetSlipPlaceBet__button-wrapper, .BetSlipPlaceBet__error-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: #606060;
+  padding-block: 10px;
+}
+
+.BetSlipPlaceBet__error-wrapper {
+  background-color: #ffbcbc;
+}
