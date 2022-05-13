@@ -19,7 +19,7 @@ export function Modal() {
   const { modalContent, onSetModalContent } = useContext(ModalContext);
   return (
     <ReactModal
-      isOpen={modalContent}
+      isOpen={Boolean(modalContent)}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
       onRequestClose={() => onSetModalContent('')}

@@ -14,7 +14,7 @@ import axios from 'axios';
     You can then make changes to it, batch it up then present in 1 go
 */
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://betduel-api.herokuapp.com';
 
 ReactDOM.render(
   <React.StrictMode>
